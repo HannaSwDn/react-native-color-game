@@ -9,7 +9,8 @@ export default class App extends React.Component {
       score: 0,
       x: 'blue',
       y: 'yellow',
-      currentColor: 'blue'
+      currentColor: 'blue',
+      timerIsOn: true
     }
   }
 
@@ -20,6 +21,7 @@ export default class App extends React.Component {
       });
 
       this.generateColors();
+
     } else {
       this.resetGame();
     }
@@ -42,6 +44,8 @@ export default class App extends React.Component {
   }
 
   resetGame() {
+    Alert.alert('You lost, you now have 0 points!');
+
     this.setState({
       score: 0
     })
@@ -50,9 +54,9 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Spel gjort av Hanna.</Text>
+        <Text style={styles.color}>Spel gjort av Hanna.</Text>
         <Text style={styles.color}>
-          { this.state.score }
+          { `Your points: ${ this.state.score }` }
         </Text>
         <Text style={styles.color}>
           {this.state.currentColor}
