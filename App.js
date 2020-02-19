@@ -9,12 +9,12 @@ export default class App extends React.Component {
       score: 0,
       x: 'blue',
       y: 'yellow',
-      currentColor: 'Just click anywhere!'
+      currentColor: 'blue'
     }
   }
 
   userClick(color) {
-    if (color == this.state.x) {
+    if (color == this.state.currentColor) {
       this.setState({
         score: this.state.score + 1
       });
@@ -31,17 +31,14 @@ export default class App extends React.Component {
     let x = colors[Math.floor(Math.random() * colors.length)];
     let y = colors[Math.floor(Math.random() * colors.length)];
 
-    console.log('x: ' + x + ' y: ' + y)
-
-    let num = Math.floor(Math.random() * 2)
-
-    if (num === 1) { this.setState({ currentColor: x }) }
-    else if (num === 2) { this.setState({ currentColor: y }) }
-
     if (x == y) {
       this.generateColors()
     } else {
       this.setState({ x: x, y: y })
+      let num = Math.floor(Math.random() * 2)
+      console.log(num)
+      if (num === 0) { this.setState({ currentColor: x }) }
+      else if (num === 1) { this.setState({ currentColor: y }) }
     }
   }
 
