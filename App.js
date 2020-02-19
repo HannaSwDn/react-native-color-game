@@ -36,7 +36,6 @@ export default class App extends React.Component {
     } else {
       this.setState({ x: x, y: y })
       let num = Math.floor(Math.random() * 2)
-      console.log(num)
       if (num === 0) { this.setState({ currentColor: x }) }
       else if (num === 1) { this.setState({ currentColor: y }) }
     }
@@ -73,11 +72,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   x: {
-    height: 70,
+    height: 100,
     width: '100%'
   },
   y: {
-    height: 70,
+    height: 100,
     width: '100%'
   },
   color: {
