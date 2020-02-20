@@ -11,7 +11,7 @@ export default class App extends React.Component {
       y: 'yellow',
       currentColor: 'blue',
       timerIsOn: true,
-      difficulty: 800
+      difficulty: 1000
     }
   }
 
@@ -60,7 +60,7 @@ export default class App extends React.Component {
   }
 
   resetGame() {
-    Alert.alert('You lost, you now have 0 points!');
+    Alert.alert(`Åhnejjj!! You got ${ this.state.score } points.\n\nThere will soon be a highscore board in this epik game.`);
 
     this.setState({
       score: 0
@@ -70,15 +70,20 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.color}>Spel gjort av Hanna.</Text>
+        <View style={styles.bar} />
+
         <Text style={styles.color}>
-          { `Your points: ${ this.state.score }` }
+          {this.state.currentColor.toUpperCase()}
         </Text>
+
+        <View style={styles.colors}>
+          <TouchableOpacity onPress={() => this.userClick(this.state.x)} style={[styles.x, { backgroundColor: this.state.x }]} />
+          <TouchableOpacity onPress={() => this.userClick(this.state.y)} style={[styles.y, { backgroundColor: this.state.y }]} />
+        </View>
+
         <Text style={styles.color}>
-          {this.state.currentColor}
+          { `POINTS: ${ this.state.score }` }
         </Text>
-        <TouchableOpacity onPress={() => this.userClick(this.state.x)} style={[styles.x, { backgroundColor: this.state.x }]} />
-        <TouchableOpacity onPress={() => this.userClick(this.state.y)} style={[styles.y, { backgroundColor: this.state.y }]} />
       </View>
     );
   }
@@ -92,14 +97,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   x: {
-    height: 180,
-    width: '100%'
+    height: '100%',
+    width: '45%'
   },
   y: {
-    height: 180,
-    width: '100%'
+    height: '100%',
+    width: '45%'
   },
   color: {
-    margin: 20
+    margin: 20,
+    fontSize: 30,
+    fontWeight: '900'
+  },
+  colors: {
+    height: 300,
+    flexDirection: 'row'
+
+  },
+  bar: {
+    height: 20,
+    backgroundColor: 'red'
   }
 });
