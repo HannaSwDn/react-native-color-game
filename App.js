@@ -10,7 +10,8 @@ export default class App extends React.Component {
       x: 'blue',
       y: 'yellow',
       currentColor: 'blue',
-      timerIsOn: true
+      timerIsOn: true,
+      difficulty: 800
     }
   }
 
@@ -48,13 +49,13 @@ export default class App extends React.Component {
 
   startTimer() {
     let lvl = this.state.score + 1;
-    console.log(`Current score: ${ lvl }`)
-    let timer = setTimeout(() => { this.endTimer(timer, lvl) }, 1500);
+    let timer = setTimeout(() => { this.endTimer(timer, lvl) }, this.state.difficulty);
   }
 
   endTimer(timer, lvl) {
-    console.log(`Score variable: ${ lvl }, current score: ${ this.state.score }`)
-    if (lvl === this.state.score) { Alert.alert(`You are at level ${ this.state.score }, and the timer stopped at ${ lvl }!!!!`) }
+    if (lvl === this.state.score) {
+      this.resetGame();
+    }
     else if (lvl !== this.state.score) { clearTimeout(timer) }
   }
 
@@ -91,11 +92,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   x: {
-    height: 100,
+    height: 180,
     width: '100%'
   },
   y: {
-    height: 100,
+    height: 180,
     width: '100%'
   },
   color: {
