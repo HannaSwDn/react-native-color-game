@@ -21,6 +21,7 @@ export default class App extends React.Component {
       });
 
       this.generateColors();
+      this.startTimer()
 
     } else {
       this.resetGame();
@@ -33,14 +34,28 @@ export default class App extends React.Component {
     let x = colors[Math.floor(Math.random() * colors.length)];
     let y = colors[Math.floor(Math.random() * colors.length)];
 
-    if (x == y) {
+    if (x === y) {
       this.generateColors()
     } else {
       this.setState({ x: x, y: y })
       let num = Math.floor(Math.random() * 2)
       if (num === 0) { this.setState({ currentColor: x }) }
-      else if (num === 1) { this.setState({ currentColor: y }) }
+      else if (num === 1) {
+        this.setState({ currentColor: y })
+      }
     }
+  }
+
+  startTimer() {
+    let lvl = this.state.score + 1;
+    console.log(`Current score: ${ lvl }`)
+    let timer = setTimeout(() => { this.endTimer(timer, lvl) }, 1500);
+  }
+
+  endTimer(timer, lvl) {
+    console.log(`Score variable: ${ lvl }, current score: ${ this.state.score }`)
+    if (lvl === this.state.score) { Alert.alert(`You are at level ${ this.state.score }, and the timer stopped at ${ lvl }!!!!`) }
+    else if (lvl !== this.state.score) { clearTimeout(timer) }
   }
 
   resetGame() {
