@@ -25,6 +25,7 @@ export default class App extends React.Component {
       this.startTimer()
 
     } else {
+      Alert.alert(`You clicked on the wrong color!! You got ${ this.state.score } points.\n\nA highscore board will soon be added to the game.`);
       this.resetGame();
     }
   }
@@ -54,14 +55,13 @@ export default class App extends React.Component {
 
   endTimer(timer, lvl) {
     if (lvl === this.state.score) {
+      Alert.alert(`You were too slow!! You got ${ this.state.score } points.\n\nA highscore board will soon be added to the game.`);
       this.resetGame();
     }
     else if (lvl !== this.state.score) { clearTimeout(timer) }
   }
 
   resetGame() {
-    Alert.alert(`Åhnejjj!! You got ${ this.state.score } points.\n\nThere will soon be a highscore board in this epik game.`);
-
     this.setState({
       score: 0
     })
@@ -71,6 +71,10 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.bar} />
+
+        <Text style={styles.instructions}>
+          Click on the correct color within 1 second to score a point.
+        </Text>
 
         <Text style={styles.color}>
           {this.state.currentColor.toUpperCase()}
@@ -117,5 +121,10 @@ const styles = StyleSheet.create({
   bar: {
     height: 20,
     backgroundColor: 'red'
+  },
+  instructions: {
+    fontSize: 20,
+    textAlign: 'center',
+    padding: 15
   }
 });
